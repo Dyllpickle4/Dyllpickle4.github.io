@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title> Menu </title>
+<script src="https://simplycodingcourses.com/files/simplyjs/simply.js"></script>
+	<script>
+		function start(){
+			sjs.open();
+			var background = new sjs.Image("Images/pulsar-831502910.jpg");
+			background.setSize(sjs.getWidth(), sjs.getHeight());
+
+			var title_menu_text = new sjs.Text("Spaceman Dash", 28, "cyan");
+			title_menu_text.centerH();
+			
+			var level_creation_button = new sjs.Button("Create A Level!", function(){
+				window.location = "platform.html";
+			});
+			level_creation_button.center();
+
+			var lvl_one_button = new sjs.Button("Level 1", function(){
+				window.location = "level1.html"
+			});
+			lvl_one_button.center().offset(0,50);
+
+			var creator_text = new sjs.Text("Created By Dylan S.", 20, "orange")
+			creator_text.bottom().centerH();
+
+		}
+	</script>
+</head>
+<body onload="start()">
+<h1> Platform Game </h1>
+
+<div id="target" style="margin:auto;background:grey;"></div>
+</body>
+</html>
