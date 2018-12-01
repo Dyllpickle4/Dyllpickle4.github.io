@@ -1,0 +1,47 @@
+<html>
+<head>
+<title> Main Menu </title>
+<script src="https://simplycodingcourses.com/files/simply.js"></script>
+	<script>
+		function start(){
+			sjs.open("target",600,400);
+
+			var background = new sjs.Image("Images/Tardis Screen.jpg");
+			background.setSize(sjs.getWidth(), sjs.getHeight());
+
+			var title_menu_text = new sjs.Text("Doctor Who Mini Games", 28, "orange");
+			title_menu_text.centerH();
+			
+			var survival_button = new sjs.Button("Survival Mode", function(){
+				window.location = "doctorwhosurvival.html";
+			});
+			survival_button.center().offset(0,-50);
+
+			var toss_button = new sjs.Button("Sonic Toss", function(){
+				window.location = "paintingwithsonic.html"
+			});
+			toss_button.center();
+
+			var info_button = new sjs.Button("Information/Controls", function(){
+				window.location = "info1.html"
+			});
+			info_button.center().offset(0, 50);
+
+			var creator_text = new sjs.Text("Created By Dylan S.", 20, "orange")
+			creator_text.bottom().centerH();
+
+			var playT = new Audio('Music/TardisSounds.mp4');
+
+			setInterval(function(){
+				playT.play();
+			}, 1000)
+
+		} //end start
+	</script>
+</head>
+<body onload="start()">
+<h1> Main Menu </h1>
+
+<div id="target" style="margin:auto;background:grey;"></div>
+</body>
+</html> 
