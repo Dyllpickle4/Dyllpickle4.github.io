@@ -1,0 +1,43 @@
+<html>
+<head>
+<title> Info </title>
+<script src="https://simplycodingcourses.com/files/simply.js"></script>
+	<script>
+		function start(){
+			sjs.open("target",500,400);
+
+			var background = new sjs.Image("Images/infoback.jpg");
+			background.setSize(sjs.getWidth(), sjs.getHeight());
+
+			var title_text = new sjs.Text("Survival Story/How to Finish:", 28, "blue");
+			title_text.centerH();
+
+			var how_text = new sjs.Text("Oh no! You have crash landed in the time of the dinosaurs and your TARDIS has disappeared. I know! You can find your TARDIS by using your 3D glasses, but they are nowhere to be found. Maybe if you wait 12 minutes the will reappear. Survive 12 minutes then find your 3D glasses. After that follow the arrows to the TARDIS!", 20, "red");
+			how_text.moveTo(0, 60);
+
+			var glasses_text = new sjs.Text("Bellow are what your 3D glasses look like. So make sure to keep an eye out!", 20, "red");
+			glasses_text.moveTo(0, 240);
+
+			var glasses = new sjs.Image("Images/3D Glasses.png")
+			glasses.moveTo(145, 300)
+			glasses.setSize(35, 25)
+
+			var button = new sjs.Button("Next Page", function(){
+				window.location = "info3.html"
+			});
+			button.moveTo(390, 370)
+
+			var prevB = new sjs.Button("Prev. Page", function(){
+				window.location = "info1.html"
+			});
+			prevB.moveTo(5, 370);
+
+		} //end start
+	</script>
+</head>
+<body onload="start()">
+<h1> Game Info </h1>
+
+<div id="target" style="margin:auto;background:grey;"></div>
+</body>
+</html> 

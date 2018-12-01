@@ -1,0 +1,54 @@
+<html>
+<head>
+<title> Info </title>
+<script src="https://simplycodingcourses.com/files/simply.js"></script>
+	<script>
+		function start(){
+			sjs.open("target",500,400);
+
+			var background = new sjs.Image("Images/infoback.jpg");
+			background.setSize(sjs.getWidth(), sjs.getHeight());
+
+			var title_text = new sjs.Text("Power Ups (Only in Survival):", 28, "blue");
+			title_text.centerH();
+
+			var guitar_text = new sjs.Text("Below is the 12th Doctor's Guitar. This item will make enemys from Doctor Who Peaceful fo 1 minute!", 20, "red");
+			guitar_text.moveTo(0, 60);
+
+			var guitar = new sjs.Image("Images/12th Doctors Guitar.png");
+			guitar.setSize(30, 30);
+			guitar.moveTo(145, 110);
+
+			var fishF_text = new sjs.Text("Below is Fish Fingers and Custard. This will make all Dino enemys peaceful for 5 minutes.", 20, "red");
+			fishF_text.moveTo(0, 180);
+
+			var fishF = new sjs.Image("Images/Fish Fingers And Custard.png");
+			fishF.setSize(30, 30);
+			fishF.moveTo(145, 230);
+
+			var fez_text = new sjs.Text("Below is a Fez. It does nothing useful in game, except make you look cool. Fezes are cool.", 20, "red");
+			fez_text.moveTo(0, 300);
+
+			var fez = new sjs.Image("Images/fez.png");
+			fez.setSize(30, 30);
+			fez.moveTo(150, 350);
+
+			var button = new sjs.Button("Back to Main Menu", function(){
+				window.location = "index.html"
+			});
+			button.moveTo(320, 370);
+
+			var prevB = new sjs.Button("Prev. Page", function(){
+				window.location = "info3.html"
+			});
+			prevB.moveTo(5, 370);
+
+		} //end start
+	</script>
+</head>
+<body onload="start()">
+<h1> Game Info </h1>
+
+<div id="target" style="margin:auto;background:grey;"></div>
+</body>
+</html> 

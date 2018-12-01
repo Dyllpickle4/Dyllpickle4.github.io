@@ -1,0 +1,28 @@
+<html>
+<head>
+<title> Win! </title>
+<script src="https://simplycodingcourses.com/files/simply.js"></script>
+	<script>
+		function start(){
+			sjs.open("target",500, 400);
+
+			var background = new sjs.Image("Images/Win2.gif");
+			background.setSize(500, 400)
+
+			var win_text = new sjs.Text("Victory is Yours!", 44, "blue");
+			win_text.centerH();
+
+			var restart_button = new sjs.Button("Replay!", function(){
+				window.location = "index.html"
+			});
+			restart_button.center();
+
+		} //end start
+	</script>
+</head>
+<body onload="start()">
+<h1> You Win! </h1>
+
+<div id="target" style="margin:auto;background:grey;"></div>
+</body>
+</html> 

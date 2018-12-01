@@ -1,0 +1,59 @@
+<html>
+<head>
+<title> Info </title>
+<script src="https://simplycodingcourses.com/files/simply.js"></script>
+	<script>
+		function start(){
+			sjs.open("target",500,400);
+
+			var background = new sjs.Image("Images/infoback.jpg");
+			background.setSize(sjs.getWidth(), sjs.getHeight());
+
+			var title_text = new sjs.Text("Controls:", 28, "blue");
+			title_text.centerH();
+
+			var muisc_keys1 = new sjs.Text("Music Keys: C = Clara on Guitar (Survival Only)", 20, "red");
+			muisc_keys1.moveTo(0, 60);
+
+			var muisc_keys2 = new sjs.Text("V = Amy Pond's Theme (Survival Only)", 20, "red");
+			muisc_keys2.moveTo(0, 90);
+
+			var muisc_keys3 = new sjs.Text("B = Matt Smith's Theme", 20, "red");
+			muisc_keys3.moveTo(0, 120)
+
+			var muisc_keys4 = new sjs.Text("N = Doctor Who Theme", 20, "red");
+			muisc_keys4.moveTo(250, 120)
+
+			var movement_keys1 = new sjs.Text("Movement Keys: W = Up", 20, "red");
+			movement_keys1.moveTo(0, 170);
+
+			var movement_keys2 = new sjs.Text("S = Down", 20, "red");
+			movement_keys2.moveTo(240, 170);
+
+			var movement_keys3 = new sjs.Text("A = Left", 20, "red");
+			movement_keys3.moveTo(350, 170);
+
+			var movement_keys4 = new sjs.Text("D = Right", 20, "red");
+			movement_keys4.moveTo(0, 200);
+
+			var movement_keys5 = new sjs.Text("E = Run", 20, "red")
+			movement_keys5.moveTo(110, 200)
+
+			var sonic_key = new sjs.Text("Just for Fun: Q = Sonic Screwdriver", 20, "red");
+			sonic_key.moveTo(0, 250);
+
+			var button = new sjs.Button("Next Page", function(){
+				window.location = "info2.html"
+			});
+			button.moveTo(390, 370)
+
+
+		} //end start
+	</script>
+</head>
+<body onload="start()">
+<h1> Game Info </h1>
+
+<div id="target" style="margin:auto;background:grey;"></div>
+</body>
+</html> 

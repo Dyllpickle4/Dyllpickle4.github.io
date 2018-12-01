@@ -1,0 +1,159 @@
+<html>
+<head>
+<title> Sonic Toss </title>
+<script src="https://simplycodingcourses.com/files/simply.js"></script>
+	<script>
+		function start(){
+			sjs.open("target",500,400);
+
+			var background = new sjs.Image("Images/Grass Background.jpg");
+			background.setSize(3000, 3000);
+
+			var doctor = new sjs.Image("Images/12thDoctorR.png");
+			doctor.type = "player";
+			doctor.setGravity(0);
+			doctor.center();
+			doctor.friction = .3;
+			doctor.noBounds = true;
+
+			var home = new sjs.Button("Main Menu", function(){
+				window.location = "index.html"
+			});
+			home.offset(390, 0)
+
+			var r_facing = true;
+			var l_facing = false;
+			var fez = false;
+			var glasses = false;
+			var dinoEnemyP = false;
+			var dwEnemyP = false;
+			var musicOn = false;
+			var toggle = true;
+
+			var smith = new Audio('Music/SmithT.mp4');
+			var doctorT = new Audio('Music/DoctorWhoT.mp4');
+
+			sjs.keyDown(B_KEY, function(){
+				if(toggle == true){
+					if(musicOn == false){
+						smith.play();
+						doctorT.pause();
+						musicOn = true;
+					} else {
+						smith.pause();
+						musicOn = false;
+					}
+					toggle = false;
+					setTimeout(function(){
+						toggle = true;
+					}, 1000);
+				}
+			});
+
+			sjs.keyDown(N_KEY, function(){
+				if(toggle == true){
+					if(musicOn == false){
+						doctorT.play();
+						smith.pause();
+						musicOn = true;
+					} else {
+						doctorT.pause();
+						musicOn = false;
+					}
+					toggle = false;
+					setTimeout(function(){
+						toggle = true;
+					}, 1000);
+				}
+			});
+
+			sjs.keyDown(D_KEY, function(){
+				r_facing = true;
+				l_facing = false;
+				doctor.setImage("Images/12thDoctorR.png")
+				doctor.pushRight(2);
+			});
+
+			sjs.keyDown(A_KEY, function(){
+				r_facing = false;
+				l_facing = true;
+				doctor.setImage("Images/12thDoctorL.png")
+				doctor.pushLeft(2);
+			});
+
+			sjs.keyDown(S_KEY, function(){
+				doctor.pushDown(2);
+			});
+
+			sjs.keyDown(W_KEY, function(){
+				doctor.pushUp(2);
+			});
+
+			sjs.keyDown(Q_KEY, function(){
+				var sonic = new sjs.Image("Images/10thDoctor'sSonicR.png")
+				if(r_facing == true){
+					doctor.setImage("Images/12thDoctorSonicR.png")
+					sonic.moveTo(doctor.getX()+44,doctor.getY()+7);
+					sonic.pushRight(25.5);
+				} else {
+					doctor.setImage("Images/12thDoctorSonicL.png")
+					sonic.moveTo(doctor.getX()+-60,doctor.getY()+7);
+					sonic.pushLeft(25.5);
+				}
+
+			});
+
+			setInterval(function(){
+				var x = Math.floor(Math.random() * 1995);
+				var y = Math.floor(Math.random() * 1995);
+				var powerUp = new sjs.Image("Images/Fez.png");
+				powerUp.type = "fez";
+				powerUp.setGravity(0);
+				powerUp.setSize(30, 30);
+				powerUp.noBounds = true;
+				powerUp.moveTo(x, y);
+				powerUp.friction = 1;
+			}, 15000);
+
+			setInterval(function(){
+				var x = Math.floor(Math.random() * 1995);
+				var y = Math.floor(Math.random() * 1995);
+				var powerUp2 = new sjs.Image("Images/Fish Fingers And Custard.png");
+				powerUp2.type = "fishFingers";
+				powerUp2.setGravity(0);
+				powerUp2.setSize(30, 30);
+				powerUp2.noBounds = true;
+				powerUp2.moveTo(x, y);
+				powerUp2.friction = 1;
+			}, 150000);
+
+			setInterval(function(){
+				var x = Math.floor(Math.random() * 1995);
+				var y = Math.floor(Math.random() * 1995);
+				var powerUp3 = new sjs.Image("Images/12th Doctors Guitar.png");
+				powerUp3.type = "guitar";
+				powerUp3.setGravity(0);
+				powerUp3.setSize(30, 30);
+				powerUp3.noBounds = true;
+				powerUp3.moveTo(x, y);
+				powerUp3.friction = 1;
+			}, 60000);
+
+			setTimeout(function(){
+				var glasses = new sjs.Image("Images/3D Glasses.png");
+				glasses.type = "glasses";
+				glasses.moveTo(30,1950);
+				glasses.setSize(25,15);
+			}, 1440000);
+	
+			sjs.scrollable(doctor, background);
+
+		} //end start
+</script>
+</head>
+<body onload="start()">
+<h1> Doctor Who (Sonic Toss) </h1>
+
+<div id="target" style="margin:auto;background:grey;"></div>
+</body>
+</html> 

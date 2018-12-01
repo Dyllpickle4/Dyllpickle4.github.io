@@ -1,0 +1,31 @@
+<html>
+<head>
+<title> Game Over! </title>
+<script src="https://simplycodingcourses.com/files/simply.js"></script>
+	<script>
+		function start(){
+			sjs.open("target",500,400);
+
+			var background = new sjs.Image("Images/Gameover2.gif");
+			background.setSize(500, 400)
+
+			var text = new sjs.Text("Game Over", 44, "red");
+			text.centerH();
+
+			var text2 = new sjs.Text("No More Regenerations", 44, "red");
+			text2.centerH().offset(0, 50);
+
+			var restart_button = new sjs.Button("Replay!", function(){
+				window.location = "index.html"
+			});
+			restart_button.center();
+
+		} //end start
+	</script>
+</head>
+<body onload="start()">
+<h1> Game Over! </h1>
+
+<div id="target" style="margin:auto;background:grey;"></div>
+</body>
+</html> 

@@ -1,0 +1,55 @@
+<html>
+<head>
+<title> Info </title>
+<script src="https://simplycodingcourses.com/files/simply.js"></script>
+	<script>
+		function start(){
+			sjs.open("target",500,400);
+
+			var background = new sjs.Image("Images/infoback.jpg");
+			background.setSize(sjs.getWidth(), sjs.getHeight());
+
+			var title_text = new sjs.Text("Enemies (Only in Survival):", 28, "blue");
+			title_text.centerH();
+
+			var dwE_text = new sjs.Text("Bellow are both of the Doctor Who enemies to look out for. The one on the left is a Cyberman. The one on the right is a Dalek. They will take 1 out of your 12 lives when touched.", 20, "red")
+			dwE_text.moveTo(0,60)
+
+			var dwE1 = new sjs.Image("Images/CybermanRNM.png")
+			dwE1.moveTo(72, 150)
+			dwE1.setSize(40, 70)
+
+			var dwE2 = new sjs.Image("Images/DalekL4.png")
+			dwE2.moveTo(180, 150)
+			dwE2.setSize(70, 70)
+
+			var dE_text = new sjs.Text("Bellow are both of the Dino enemies to look out for. The one on the left is a Velociraptor. The one on the right is a T-Rex. They will take 1 out of your 12 lives when touched.", 20, "red")
+			dE_text.moveTo(0, 230)
+
+			var dE1 = new sjs.Image("Images/RaptorR.png")
+			dE1.moveTo(72, 315)
+			dE1.setSize(70, 40)
+
+			var dE2 = new sjs.Image("Images/T-RexL.png")
+			dE2.moveTo(180, 310)
+			dE2.setSize(70, 50)
+
+			var button = new sjs.Button("Next Page", function(){
+				window.location = "info4.html"
+			});
+			button.moveTo(390, 370)
+
+			var prevB = new sjs.Button("Prev. Page", function(){
+				window.location = "info2.html"
+			});
+			prevB.moveTo(5, 370);
+
+		} //end start
+	</script>
+</head>
+<body onload="start()">
+<h1> Game Info </h1>
+
+<div id="target" style="margin:auto;background:grey;"></div>
+</body>
+</html> 

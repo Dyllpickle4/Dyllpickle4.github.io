@@ -1,0 +1,487 @@
+<html>
+<head>
+<title> Survival </title>
+<script src="https://simplycodingcourses.com/files/simply.js"></script>
+	<script>
+		function start(){
+			sjs.open("target",500,400);
+
+			var background = new sjs.Image("Images/Grass Background 4.jpg");
+			background.setSize(2020, 2020);
+
+			var home = new sjs.Button("Main Menu", function(){
+				window.location = "index.html"
+			});
+			home.offset(390, 0)
+
+			var doctor = new sjs.Image("Images/12thDoctorR.png");
+			doctor.type = "doctor"
+			doctor.setSize(70,70);
+			doctor.setGravity(0);
+			doctor.friction = .3;
+			doctor.noBounds = true;
+			doctor.accel = .1;
+			doctor.bottom();
+
+			sjs.scrollable(doctor, background);
+
+			var r_facing = true;
+			var l_facing = false;
+			var fez = false;
+			var glasses = false;
+			var dinoEnemyP = false;
+			var dwEnemyP = false;
+			var musicOn = false;
+			var toggle = true;
+
+
+
+			//Music
+
+			var clara = new Audio('Music/ClaraT.mp4');
+			var amy = new Audio('Music/AmyT.mp4');
+			var smith = new Audio('Music/SmithT.mp4');
+			var doctorT = new Audio('Music/DoctorWhoT.mp4');
+
+			sjs.keyDown(C_KEY, function(){
+				if(toggle == true){
+					if(musicOn == false){
+						clara.play();
+						amy.pause();
+						smith.pause();
+						doctorT.pause();
+						musicOn = true;
+					} else {
+						clara.pause();
+						musicOn = false;
+					}
+					toggle = false;
+					setTimeout(function(){
+						toggle = true;
+					}, 1000);
+				}
+			});
+
+			sjs.keyDown(V_KEY, function(){
+				if(toggle == true){
+					if(musicOn == false){
+						amy.play();
+						clara.pause();
+						smith.pause();
+						doctorT.pause();
+						musicOn = true;
+					} else {
+						amy.pause();
+						musicOn = false;
+					}
+					toggle = false;
+					setTimeout(function(){
+						toggle = true;
+					}, 1000);
+				}
+			});
+
+			sjs.keyDown(B_KEY, function(){
+				if(toggle == true){
+					if(musicOn == false){
+						smith.play();
+						clara.pause();
+						amy.pause();
+						doctorT.pause();
+						musicOn = true;
+					} else {
+						smith.pause();
+						musicOn = false;
+					}
+					toggle = false;
+					setTimeout(function(){
+						toggle = true;
+					}, 1000);
+				}
+			});
+
+			sjs.keyDown(N_KEY, function(){
+				if(toggle == true){
+					if(musicOn == false){
+						doctorT.play();
+						clara.pause();
+						amy.pause();
+						smith.pause();
+						musicOn = true;
+					} else {
+						doctorT.pause();
+						musicOn = false;
+					}
+					toggle = false;
+					setTimeout(function(){
+						toggle = true;
+					}, 1000);
+				}
+			});
+
+
+
+			//Key Downs
+
+			sjs.keyDown(D_KEY, function(){
+				r_facing = true;
+				l_facing = false;
+				if(fez == true){
+					doctor.setImage("Images/12thDoctorRWF.png");
+				} else {
+					doctor.setImage("Images/12thDoctorR.png");
+				}
+				doctor.pushRight(2);
+			});
+
+			sjs.keyDown(A_KEY, function(){
+				r_facing = false;
+				l_facing = true;
+				if(fez == true){
+					doctor.setImage("Images/12thDoctorLWF.png");
+				} else {
+					doctor.setImage("Images/12thDoctorL.png");
+				}
+				doctor.pushLeft(2);
+			});
+
+			sjs.keyDown(S_KEY, function(){
+				doctor.pushDown(2);
+			});
+
+			sjs.keyDown(W_KEY, function(){
+				doctor.pushUp(2);
+			});
+
+			sjs.keyDown(E_KEY, function(){
+				doctor.accel = .2;
+			});
+
+			window.addEventListener("keyup", function(e){
+				if(e.keyCode == E_KEY){
+					doctor.accel = .1;
+				}
+			});
+
+			sjs.keyDown(Q_KEY, function(){
+				if(r_facing == true){
+					if(fez == true){
+						doctor.setImage("Images/12thDoctorSonicRWF.png");
+					} else {
+						doctor.setImage("Images/12thDoctorSonicRWS.png");
+					}
+				} else {
+					if(fez == true){
+						doctor.setImage("Images/12thDoctorSonicLWF.png");
+					} else {
+						doctor.setImage("Images/12thDoctorSonicLWS.png");
+					}
+				}
+			});
+
+			window.addEventListener("keyup", function(e){
+				if(e.keyCode == Q_KEY){
+					if(r_facing == true){
+						if(fez == true){
+							doctor.setImage("Images/12thDoctorRWF.png");
+						} else {
+							doctor.setImage("Images/12thDoctorR.png");
+						}
+					} else {
+						if(fez == true){
+							doctor.setImage("Images/12thDoctorLWF.png");
+						} else {
+							doctor.setImage("Images/12thDoctorL.png");
+						}
+					}
+				}
+			}); //End Event Listener
+
+			
+
+			//Life Settings
+
+			var life_text = new sjs.Text("Lives: 12", 21, "blue");
+			life_text.fixed = true;
+
+			var life = 12;
+
+
+
+			//PowerUp Intervals/Timeouts
+
+			setInterval(function(){
+				var x = Math.floor(Math.random() * 1995);
+				var y = Math.floor(Math.random() * 1995);
+				var powerUp = new sjs.Image("Images/Fez.png");
+				powerUp.type = "fez";
+				powerUp.setGravity(0);
+				powerUp.setSize(30, 30);
+				powerUp.noBounds = true;
+				powerUp.moveTo(x, y);
+				powerUp.friction = 1;
+			}, 15000);
+
+			setInterval(function(){
+				var x = Math.floor(Math.random() * 1995);
+				var y = Math.floor(Math.random() * 1995);
+				var powerUp2 = new sjs.Image("Images/Fish Fingers And Custard.png");
+				powerUp2.type = "fishFingers";
+				powerUp2.setGravity(0);
+				powerUp2.setSize(30, 30);
+				powerUp2.noBounds = true;
+				powerUp2.moveTo(x, y);
+				powerUp2.friction = 1;
+			}, 150000);
+
+			setInterval(function(){
+				var x = Math.floor(Math.random() * 1995);
+				var y = Math.floor(Math.random() * 1995);
+				var powerUp3 = new sjs.Image("Images/12th Doctors Guitar.png");
+				powerUp3.type = "guitar";
+				powerUp3.setGravity(0);
+				powerUp3.setSize(30, 30);
+				powerUp3.noBounds = true;
+				powerUp3.moveTo(x, y);
+				powerUp3.friction = 1;
+			}, 60000);
+
+			setTimeout(function(){
+				var glasses = new sjs.Image("Images/3D Glasses.png");
+				glasses.type = "glasses";
+				glasses.moveTo(30,1950);
+				glasses.setSize(25,15);
+			}, 720000);
+
+
+
+			//Enemy Intervals
+
+			setInterval(function(){
+				var speed = Math.round(1 + Math.random()*10);
+				var x = Math.floor(Math.random() * 1995);
+				var y = Math.floor(Math.random() * 1995);
+				var dwEnemy1 = new sjs.Image("Images/CybermanRNM.png");
+				dwEnemy1.type = "dwEnemy";
+				dwEnemy1.setGravity(0)
+				dwEnemy1.setSize(40,70);
+				dwEnemy1.noBounds = true;
+				dwEnemy1.friction = 0;
+				dwEnemy1.moveTo(x,y);
+				dwEnemy1.pushRight(speed);
+				dwEnemy1.pushDown(speed);
+			}, 10000);
+
+			setInterval(function(){
+				var speed = Math.round(1 + Math.random()*10);
+				var x = Math.floor(Math.random() * 1995);
+				var y = Math.floor(Math.random() * 1995);
+				var dwEnemy4 = new sjs.Image("Images/CybermanLNM.png");
+				dwEnemy4.type = "dwEnemy";
+				dwEnemy4.setGravity(0)
+				dwEnemy4.setSize(40,70);
+				dwEnemy4.noBounds = true;
+				dwEnemy4.friction = 0;
+				dwEnemy4.moveTo(x,y);
+				dwEnemy4.pushLeft(speed);
+				dwEnemy4.pushUp(speed);
+			}, 10000);
+
+			setInterval(function(){
+				var speed = Math.round(1 + Math.random()*10);
+				var x = Math.floor(Math.random() * 1995);
+				var y = Math.floor(Math.random() * 1995);
+				var dwEnemy2 = new sjs.Image("Images/DalekL4.png");
+				dwEnemy2.type = "dwEnemy";
+				dwEnemy2.setGravity(0)
+				dwEnemy2.setSize(70,70);
+				dwEnemy2.noBounds = true;
+				dwEnemy2.friction = 0;
+				dwEnemy2.moveTo(x,y);
+				dwEnemy2.pushLeft(speed);
+				dwEnemy2.pushDown(speed);
+			}, 10000);
+
+			setInterval(function(){
+				var speed = Math.round(1 + Math.random()*10);
+				var x = Math.floor(Math.random() * 1995);
+				var y = Math.floor(Math.random() * 1995);
+				var dwEnemy3 = new sjs.Image("Images/DalekR2.png");
+				dwEnemy3.type = "dwEnemy";
+				dwEnemy3.setGravity(0)
+				dwEnemy3.setSize(70,70);
+				dwEnemy3.noBounds = true;
+				dwEnemy3.friction = 0;
+				dwEnemy3.moveTo(x,y);
+				dwEnemy3.pushRight(speed);
+				dwEnemy3.pushUp(speed);
+			}, 10000);
+
+			setInterval(function(){
+				var speed = Math.round(1 + Math.random()*10);
+				var x = Math.floor(Math.random() * 1995);
+				var y = Math.floor(Math.random() * 1995);
+				var dEnemy1 = new sjs.Image("Images/RaptorR.png");
+				dEnemy1.type = "dEnemy";
+				dEnemy1.setGravity(0)
+				dEnemy1.setSize(70,40);
+				dEnemy1.noBounds = true;
+				dEnemy1.friction = 0;
+				dEnemy1.moveTo(x,y);
+				dEnemy1.pushRight(speed);
+				dEnemy1.pushDown(speed);
+			}, 10000);
+
+			setInterval(function(){
+				var speed = Math.round(1 + Math.random()*10);
+				var x = Math.floor(Math.random() * 1995);
+				var y = Math.floor(Math.random() * 1995);
+				var dEnemy2 = new sjs.Image("Images/RaptorL.png");
+				dEnemy2.type = "dEnemy";
+				dEnemy2.setGravity(0)
+				dEnemy2.setSize(70,40);
+				dEnemy2.noBounds = true;
+				dEnemy2.friction = 0;
+				dEnemy2.moveTo(x,y);
+				dEnemy2.pushLeft(speed);
+				dEnemy2.pushUp(speed);
+			}, 10000);
+
+			setInterval(function(){
+				var speed = Math.round(1 + Math.random()*10);
+				var x = Math.floor(Math.random() * 1995);
+				var y = Math.floor(Math.random() * 1995);
+				var dEnemy3 = new sjs.Image("Images/T-RexR.png");
+				dEnemy3.type = "dEnemy";
+				dEnemy3.setGravity(0)
+				dEnemy3.setSize(70,50);
+				dEnemy3.noBounds = true;
+				dEnemy3.friction = 0;
+				dEnemy3.moveTo(x,y);
+				dEnemy3.pushRight(speed);
+				dEnemy3.pushUp(speed);
+			}, 10000);
+
+			setInterval(function(){
+				var speed = Math.round(1 + Math.random()*10);
+				var x = Math.floor(Math.random() * 1995);
+				var y = Math.floor(Math.random() * 1995);
+				var dEnemy4 = new sjs.Image("Images/T-RexL.png");
+				dEnemy4.type = "dEnemy";
+				dEnemy4.setGravity(0)
+				dEnemy4.setSize(70,50);
+				dEnemy4.noBounds = true;
+				dEnemy4.friction = 0;
+				dEnemy4.moveTo(x,y);
+				dEnemy4.pushLeft(speed);
+				dEnemy4.pushDown(speed);
+			}, 10000);
+
+
+
+			//Enemy On Hits
+
+			sjs.onHit("dwEnemy", ["right_screen", "left_screen", "top_screen", "bottom_screen"], function(x,y){
+				x.destroy();
+			});
+
+			sjs.onHit("dwEnemy", "tardis", function(x,y){
+				x.destroy();
+			});
+
+			sjs.onHit("dEnemy", ["right_screen", "left_screen", "top_screen", "bottom_screen"], function(x,y){
+				x.destroy();
+			});
+
+			sjs.onHit("dEnemy", "tardis", function(x,y){
+				x.destroy();
+			});
+
+
+
+			//On Hits For Doctor
+
+			sjs.onHit("doctor", "fez", function(x,y){
+				if(r_facing == true){
+					doctor.setImage("Images/12thDoctorRWF.png");
+				} else {
+					doctor.setImage("Images/12thDoctorLWF.png");
+				}
+				y.destroy();
+				fez = true
+			});
+
+			sjs.onHit("doctor", "glasses", function(x,y){
+				y.destroy();
+				background.setImage("Images/Grass Background 4 Tardis Direction.png");
+				var tardis = new sjs.Image("Images/Tardis.png");
+				tardis.type = "tardis";
+				tardis.moveTo(1010, 1010);
+				tardis.setSize(120,120);
+			});
+
+			sjs.onHit("doctor", "fishFingers", function(x,y){
+				dinoEnemyP = true;
+				setTimeout(function(){
+					dinoEnemyP = false;
+				}, 300000);
+				y.destroy();
+			});
+
+			sjs.onHit("doctor", "guitar", function(x,y){
+				dwEnemyP = true;
+				setTimeout(function(){
+					dwEnemyP = false;
+				}, 60000);
+				y.destroy();
+			});
+
+			sjs.onHit("doctor", ["right_screen", "left_screen", "top_screen", "bottom_screen"], function(x,y){
+				
+				sjs.stoppedBy(x,y)
+
+			});
+
+			sjs.onHit("doctor", "dEnemy", function(x,y){
+				if(dinoEnemyP == false){
+					if(life == 0){
+						window.location = "gameover.html"
+					} else {
+						sjs.stoppedBy(x,y);
+						life = life - 1;
+						life_text.setText("Lives: "+ life);
+						doctor.moveTo(30, 1950);
+					}
+				} else {
+					sjs.stoppedBy(x,y);
+				}
+			});
+
+			sjs.onHit("doctor", "dwEnemy", function(x,y){
+				if(dwEnemyP == false){
+					if(life == 0){
+						window.location = "gameover.html"
+					} else {
+						sjs.stoppedBy(x,y);
+						life = life - 1;
+						life_text.setText("Lives: "+ life);
+						doctor.moveTo(30, 1950);
+					}
+				} else {
+					sjs.stoppedBy(x,y);
+				}
+			});
+
+			sjs.onHit("doctor", "tardis", function(x,y){
+				window.location = "win.html";
+			});
+
+		} //end start
+</script>
+</head>
+<body onload="start()">
+<h1> Doctor Who (Survival) </h1>
+
+<div id="target" style="margin:auto;background:grey;"></div>
+</body>
+</html> 
